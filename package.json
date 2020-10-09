@@ -1,0 +1,30 @@
+{
+  "name": "agenttrends",
+  "version": "1.0.0",
+  "description": "a tool to visualize agent data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrytheyang/agentTrends.git"
+  },
+  "author": "henrytheyang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henrytheyang/agentTrends/issues"
+  },
+  "homepage": "https://github.com/henrytheyang/agentTrends#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node": "^14.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "nodemon": "^2.0.4"
+  }
+}
