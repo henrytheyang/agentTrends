@@ -5,7 +5,9 @@ import $ from 'jquery';
 class Caller extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {profileName: ''};
+    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'https://www.zillow.com/profile/jessecyang/';
+    this.state = {agentProfile: `${proxyurl + url}`};
   }
   componentDidMount() {
     this.dataCall();
@@ -16,7 +18,7 @@ class Caller extends React.Component {
 
   dataCall() {
     $.ajax({
-      url: "https://www.zillow.com/profile/jessecyang/",
+      url: `${this.state.agentProfile}`,
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
