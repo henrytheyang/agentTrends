@@ -2,17 +2,20 @@ import React from 'React';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+let profileName = 'jessecyang';
+
 class Caller extends React.Component {
   constructor(props) {
     super(props);
-    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-    let url = 'https://www.zillow.com/profile/jessecyang/';
+    let url = `https://www.zillow.com/profile/${profileName}/`;
+    // let url = `https://www.zillow.com/profile/jessecyang/`;
     this.state = {
       agentProfile: `${proxyurl + url}`,
       agentProfileHtml: ``,
       agentZuid: ``,
       agentDataUrl: `${proxyurl}https://www.zillow.com/ajax/profiles/ProfileMapResultsAsync.htm?&encZuid=X1-ZUylir7sxs3w21_9y704&W=-124220634&S=32916485&E=-114722109&N=41705729&publicView=true`,
-      agentData: `Placeholder`,
+      agentData: [],
     };
   }
   componentDidMount() {
@@ -22,6 +25,7 @@ class Caller extends React.Component {
 
   }
   dataCall() {
+    console.log(`agentProfile = ${this.state.agentProfile}`)
     $.ajax({
       url: `${this.state.agentProfile}`,
       success: (result) => {
@@ -46,14 +50,17 @@ class Caller extends React.Component {
         break;
       }
     }
-    this.populateAgentData(`PLACEHOLDER`);
+    this.populateAgentData(this.state.agentZuid);
   }
   populateAgentData(zuid) {
-    console.log('in populateAgentData');
     $.ajax({
-      url: this.state.agentDataUrl,
+      url: `${proxyurl}https://www.zillow.com/ajax/profiles/ProfileMapResultsAsync.htm?&encZuid=${zuid}&W=-124220634&S=32916485&E=-114722109&N=41705729`,
       success: (result) => {
-        console.log(result);
+        console.log(`populateAgentData success`);
+        console.log(`typeof result = ${typeof result}`)
+        // console.log(JSON.stringify(result.tx[0]));
+        // console.log(result.tx[0]);
+        this.setState({agentData: result.tx});
       },
       error: (result) => {
         console.log(result);
@@ -63,8 +70,8 @@ class Caller extends React.Component {
   render() {
     return (
       <div>
-        <div>{this.state.agentData}</div>
-    <div>agentZuid = {this.state.agentZuid}</div>
+        <div>agentZuid = {this.state.agentZuid}</div>
+        <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
       </div>
     )
   }
