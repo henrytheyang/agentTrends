@@ -10,6 +10,8 @@ class Caller extends React.Component {
     this.state = {
       agentProfile: `${proxyurl + url}`,
       agentProfileHtml: ``,
+      agentZuid: ``,
+      agentDataUrl: `${proxyurl}https://www.zillow.com/ajax/profiles/ProfileMapResultsAsync.htm?&encZuid=X1-ZUylir7sxs3w21_9y704&W=-124220634&S=32916485&E=-114722109&N=41705729&publicView=true`,
       agentData: `Placeholder`,
     };
   }
@@ -25,7 +27,6 @@ class Caller extends React.Component {
       success: (result) => {
         this.grabZuid(result);
         this.setState({agentProfileHtml: result});
-        // console.log(result);
       },
       error: (result) => {
         console.log(result);
@@ -41,15 +42,16 @@ class Caller extends React.Component {
       if (data[i] === 'Z' && data[i + 1] === 'u' && data[i + 2] === 'i') {
         zuid = data.slice(i + 7, i + 30);
         console.log(`zuid = ${zuid}`);
-        return zuid;
+        this.setState({agentZuid: zuid});
+        break;
       }
     }
-    populateAgentData(PLACEHOLDER);
+    this.populateAgentData(`PLACEHOLDER`);
   }
   populateAgentData(zuid) {
     console.log('in populateAgentData');
     $.ajax({
-      url: `https://www.zillow.com/ajax/profiles/ProfileMapResultsAsync.htm?&encZuid=X1-ZUylir7sxs3w21_9y704&W=-119081906&S=33658503&E=-117716855&N=34398277&publicView=true`,
+      url: this.state.agentDataUrl,
       success: (result) => {
         console.log(result);
       },
@@ -62,6 +64,7 @@ class Caller extends React.Component {
     return (
       <div>
         <div>{this.state.agentData}</div>
+    <div>agentZuid = {this.state.agentZuid}</div>
       </div>
     )
   }
