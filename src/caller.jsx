@@ -1,6 +1,7 @@
 import React from 'React';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import Status from './status';
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 let profileName = 'jessecyang';
@@ -70,6 +71,7 @@ class Caller extends React.Component {
   render() {
     return (
       <div>
+        <Status/>
         <div>agentZuid = {this.state.agentZuid}</div>
         <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
       </div>
