@@ -17,6 +17,7 @@ class Caller extends React.Component {
       agentZuid: ``,
       agentDataUrl: `${proxyurl}https://www.zillow.com/ajax/profiles/ProfileMapResultsAsync.htm?&encZuid=X1-ZUylir7sxs3w21_9y704&W=-124220634&S=32916485&E=-114722109&N=41705729&publicView=true`,
       agentData: [],
+      status: ['GRABBING PROFILE FROM SOURCE']
     };
   }
   componentDidMount() {
@@ -30,6 +31,7 @@ class Caller extends React.Component {
     $.ajax({
       url: `${this.state.agentProfile}`,
       success: (result) => {
+        this.setState({status: this.state.status.concat(['GRABBING TRANSACTION DATA'])})
         this.grabZuid(result);
         this.setState({agentProfileHtml: result});
       },
@@ -71,8 +73,7 @@ class Caller extends React.Component {
   render() {
     return (
       <div>
-        <Status/>
-        <div>agentZuid = {this.state.agentZuid}</div>
+        <Status status={this.state.status}/>
         <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
       </div>
     )
