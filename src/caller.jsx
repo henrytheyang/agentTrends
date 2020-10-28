@@ -64,6 +64,9 @@ class Caller extends React.Component {
         // console.log(JSON.stringify(result.tx[0]));
         // console.log(result.tx[0]);
         this.setState({agentData: result.tx});
+        let numTransactions = Object.keys(result.tx).length;
+        this.setState({status: this.state.status.concat([`${numTransactions} transactions found`])})
+        console.log(`# of transactions = ${numTransactions}`);
       },
       error: (result) => {
         console.log(result);
