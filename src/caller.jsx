@@ -5,20 +5,19 @@ import Status from './status';
 import TextInput from './inputField';
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-let profileName = 'jessecyang';
+const url = `https://www.zillow.com/profile/`;
 
 class Caller extends React.Component {
   constructor(props) {
     super(props);
-    let url = `https://www.zillow.com/profile/${profileName}/`;
-    // let url = `https://www.zillow.com/profile/jessecyang/`;
     this.state = {
+      profileName: 'jessecyang',
       agentProfile: `${proxyurl + url}`,
       agentProfileHtml: ``,
       agentZuid: ``,
       agentDataUrl: `${proxyurl}https://www.zillow.com/ajax/profiles/ProfileMapResultsAsync.htm?&encZuid=X1-ZUylir7sxs3w21_9y704&W=-124220634&S=32916485&E=-114722109&N=41705729&publicView=true`,
       agentData: [],
-      status: ['GRABBING PROFILE FROM SOURCE']
+      status: ['Grabbing Profile From Source']
     };
   }
   componentDidMount() {
@@ -28,11 +27,11 @@ class Caller extends React.Component {
 
   }
   dataCall() {
-    console.log(`agentProfile = ${this.state.agentProfile}`)
+    console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
     $.ajax({
-      url: `${this.state.agentProfile}`,
+      url: `${this.state.agentProfile + this.state.profileName}`,
       success: (result) => {
-        this.setState({status: this.state.status.concat(['GRABBING TRANSACTION DATA'])})
+        this.setState({status: this.state.status.concat(['Grabbing Transaction Data'])})
         this.grabZuid(result);
         this.setState({agentProfileHtml: result});
       },
@@ -77,7 +76,7 @@ class Caller extends React.Component {
   render() {
     return (
       <div>
-        <TextInput/>
+        <TextInput text={this.state.profileName}/>
         <Status status={this.state.status}/>
         <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
       </div>
