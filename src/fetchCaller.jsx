@@ -2,6 +2,7 @@ import React from 'React';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Status from './status';
+const fetch = require('node-fetch')
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 // let profileName = 'jessecyang';
@@ -33,11 +34,20 @@ class Fetcher extends React.Component {
     })
       // .then(console.log('dataCall fetch completed'))
       // .then(result => console.log(`result = ${result}`))
-      .then(response => {
-        console.log(`response = ${JSON.stringify(response)}`)
-        this.grabZuid(response);
+      .then(response => response.json())
+      .then(json => {
+        console.log(`parsed json= ${JSON.parse(json)}`)
       })
-      .then(response => this.setState({agentProfileHtml: response}))
+      // .then(response => {
+      //   if (response.ok) {
+      //     console.log('in dataCall fetch if response.ok now')
+      //     response.json().then(json => {
+      //       console.log(json);
+      //     })
+      //   }
+      // })
+      // .then(response => this.setState({agentProfileHtml: response}))
+      .catch(error => console.log(`error = ${error}`))
   }
   grabZuid(data) {
     // Search for "Zui" then skip two (d=) and grab the next 23 characters
@@ -64,9 +74,9 @@ class Fetcher extends React.Component {
   render() {
     return (
       <div>
-        <Status/>
+        {/* <Status/>
         <div>agentZuid = {this.state.agentZuid}</div>
-        <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
+        <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div> */}
       </div>
     )
   }
