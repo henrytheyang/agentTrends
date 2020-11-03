@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 
 let TextInput = (props) => {
   return (
-    <input/>
+    <label>
+      {/* <input> placeHolder={props.text}</input> */}
+      {/* <input type="text" value={props.text}  /> */}
+      <input type="text" placeholder='Enter agent profile name'  />
+    </label>
   );
 }
 
