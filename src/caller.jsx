@@ -73,10 +73,17 @@ class Caller extends React.Component {
       }
     })
   }
+  handleChange(event) {
+    this.setState({profileName: event.target.value});
+  }
+  handleSubmit(event) {
+    this.dataCall();
+  }
+
   render() {
     return (
       <div>
-        <TextInput text={this.state.profileName}/>
+        <TextInput text={this.state.profileName} handleChange={(e) => this.handleChange(e)} handleSubmit={() => this.handleSubmit}/>
         <Status status={this.state.status}/>
         <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
       </div>
