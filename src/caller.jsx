@@ -11,7 +11,7 @@ class Caller extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileName: 'jessecyang',
+      profileName: 'shanahanyang',
       agentProfile: `${proxyurl + url}`,
       agentProfileHtml: ``,
       agentZuid: ``,
@@ -20,12 +20,7 @@ class Caller extends React.Component {
       status: ['Grabbing Profile From Source']
     };
   }
-  componentDidMount() {
-    this.dataCall();
-  }
-  componentWillUnmount() {
 
-  }
   dataCall() {
     console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
     $.ajax({
@@ -61,8 +56,8 @@ class Caller extends React.Component {
       success: (result) => {
         console.log(`populateAgentData success`);
         console.log(`typeof result = ${typeof result}`)
-        // console.log(JSON.stringify(result.tx[0]));
-        // console.log(result.tx[0]);
+        console.log(JSON.stringify(result.tx[0]));
+        console.log(result.tx[0]);
         this.setState({agentData: result.tx});
         let numTransactions = Object.keys(result.tx).length;
         this.setState({status: this.state.status.concat([`${numTransactions} transactions found`])})
@@ -77,13 +72,15 @@ class Caller extends React.Component {
     this.setState({profileName: event.target.value});
   }
   handleSubmit(event) {
+    console.log('handleSubmit triggered')
+    event.preventDefault();
     this.dataCall();
   }
 
   render() {
     return (
       <div>
-        <TextInput text={this.state.profileName} handleChange={(e) => this.handleChange(e)} handleSubmit={() => this.handleSubmit}/>
+        <TextInput text={this.state.profileName} handleChange={e => this.handleChange(e)} handleSubmit={e => this.handleSubmit(e)}/>
         <Status status={this.state.status}/>
         <div>stringified agentData = {JSON.stringify(this.state.agentData)}</div>
       </div>
