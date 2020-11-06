@@ -7,11 +7,13 @@ import TextInput from './inputField';
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 const url = `https://www.zillow.com/profile/`;
 
+
+// Need to create own cors-anywhere server
 class Caller extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileName: 'shanahanyang',
+      profileName: '',
       agentProfile: `${proxyurl + url}`,
       agentProfileHtml: ``,
       agentZuid: ``,
