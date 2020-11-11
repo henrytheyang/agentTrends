@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Status from './status';
 import TextInput from './inputField';
+import scanPastSales from './domManipulation';
+import dummyData from './dummyData.html';
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 const url = `https://www.zillow.com/profile/`;
@@ -24,10 +26,12 @@ class Caller extends React.Component {
   }
 
   dataCall() {
+    scanPastSales();
     console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
     $.ajax({
       url: `${this.state.agentProfile + this.state.profileName}`,
       success: (result) => {
+        console.log(`result = ${result}`);
         this.setState({status: this.state.status.concat(['Grabbing Transaction Data'])})
         this.grabZuid(result);
         this.setState({agentProfileHtml: result});
