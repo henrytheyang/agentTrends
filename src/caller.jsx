@@ -31,7 +31,7 @@ class Caller extends React.Component {
     $.ajax({
       url: `${this.state.agentProfile + this.state.profileName}`,
       success: (result) => {
-        console.log(`result = ${result}`);
+        // console.log(`result = ${result}`);
         this.setState({status: this.state.status.concat(['Grabbing Transaction Data'])})
         this.grabZuid(result);
         this.setState({agentProfileHtml: result});
@@ -80,7 +80,8 @@ class Caller extends React.Component {
   handleSubmit(event) {
     console.log('handleSubmit triggered')
     event.preventDefault();
-    this.dataCall();
+    // this.dataCall();
+    scanPastSales();
   }
 
   render() {
