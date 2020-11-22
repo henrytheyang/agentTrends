@@ -27,7 +27,7 @@ class Caller extends React.Component {
 
   dataCall() {
     scanPastSales();
-    console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
+    // console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
     $.ajax({
       url: `${this.state.agentProfile + this.state.profileName}`,
       success: (result) => {
@@ -80,8 +80,8 @@ class Caller extends React.Component {
   handleSubmit(event) {
     console.log('handleSubmit triggered')
     event.preventDefault();
-    // this.dataCall();
-    scanPastSales();
+    this.dataCall();
+    // scanPastSales();
   }
 
   render() {
