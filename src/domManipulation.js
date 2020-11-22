@@ -10,8 +10,8 @@ const scanPastSales = () => {
   //   $("section").filter("#pastSales");
   // })
   $.get('https://cors-anywhere.herokuapp.com/https://www.zillow.com/profile/jessecyang')
-    // .then(response => console.log(response))
     .then(response => $(response).find("section").filter("#pastSales"))
+    // tbody child w/ rows class name is ".StyledTableBody-c11n-8-9-3__sc-8i1s74-0 eQWIgF"
     .then(response => console.log(response))
 };
 
