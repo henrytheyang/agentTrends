@@ -9,6 +9,7 @@ import dummyData from './dummyData.html';
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 const url = `https://www.zillow.com/profile/`;
 
+//https://cors-anywhere.herokuapp.com/https://www.zillow.com/profile/jessecyang
 
 // Need to create own cors-anywhere server
 class Caller extends React.Component {
@@ -26,7 +27,7 @@ class Caller extends React.Component {
   }
 
   dataCall() {
-    scanAllPastSales(`${this.state.agentProfile} + ${this.state.profileName}`);
+    scanAllPastSales(`${this.state.agentProfile}${this.state.profileName}`);
     // console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
     // $.ajax({
     //   url: `${this.state.agentProfile + this.state.profileName}`,
