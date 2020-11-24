@@ -19,8 +19,7 @@ const nextPage = () => {
 
 const scanCurrentPage = (someHtmlPromise) => {
   return new Promise( (resolve, reject) => {
-    let data = $(someHtmlPromise).find("#pastSales")
-    console.log(`data = ${data}`)
+    let data = $(someHtmlPromise).find("#pastSales").find("tbody[class='StyledTableBody-c11n-8-9-3__sc-8i1s74-0 eQWIgF']")
     resolve(data)
   })
 }
