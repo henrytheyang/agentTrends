@@ -26,20 +26,20 @@ class Caller extends React.Component {
   }
 
   dataCall() {
-    scanPastSales();
+    scanPastSales(`${this.state.agentProfile} + ${this.state.profileName}`);
     // console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
-    $.ajax({
-      url: `${this.state.agentProfile + this.state.profileName}`,
-      success: (result) => {
-        // console.log(`result = ${result}`);
-        this.setState({status: this.state.status.concat(['Grabbing Transaction Data'])})
-        this.grabZuid(result);
-        this.setState({agentProfileHtml: result});
-      },
-      error: (result) => {
-        console.log(result);
-      }
-    })
+    // $.ajax({
+    //   url: `${this.state.agentProfile + this.state.profileName}`,
+    //   success: (result) => {
+    //     // console.log(`result = ${result}`);
+    //     this.setState({status: this.state.status.concat(['Grabbing Transaction Data'])})
+    //     this.grabZuid(result);
+    //     this.setState({agentProfileHtml: result});
+    //   },
+    //   error: (result) => {
+    //     console.log(result);
+    //   }
+    // })
   }
   grabZuid(data) {
     // Search for "Zui" then skip two (d=) and grab the next 23 characters
