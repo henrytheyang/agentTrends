@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Status from './status';
 import TextInput from './inputField';
-import scanPastSales from './domManipulation';
+import scanAllPastSales from './domManipulation';
 import dummyData from './dummyData.html';
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
@@ -26,7 +26,7 @@ class Caller extends React.Component {
   }
 
   dataCall() {
-    scanPastSales(`${this.state.agentProfile} + ${this.state.profileName}`);
+    scanAllPastSales(`${this.state.agentProfile} + ${this.state.profileName}`);
     // console.log(`agentProfile = ${this.state.agentProfile + this.state.profileName}`)
     // $.ajax({
     //   url: `${this.state.agentProfile + this.state.profileName}`,
@@ -81,7 +81,7 @@ class Caller extends React.Component {
     console.log('handleSubmit triggered')
     event.preventDefault();
     this.dataCall();
-    // scanPastSales();
+    // scanAllPastSales();
   }
 
   render() {

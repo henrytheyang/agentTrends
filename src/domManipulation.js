@@ -18,13 +18,14 @@ const nextPage = () => {
 }
 
 const scanCurrentPage = (someHtml) => {
-  return $(someHtml).find("section").filter("#pastSales")
-    .then(response => console.log(response))
+  return new Promise( (resolve, reject) => {
+    $(someHtml).find("section").filter("#pastSales")
+    resolve(response)
+  })
 }
 
-const scanPastSales = (someURL) => {
-  console.log('scanPastSales test');
-  // console.log(`dummyData = ${dummyData}`)
+const scanAllPastSales = (someURL) => {
+  console.log('scanAllPastSales test');
 
   $.get(someURL)
     .then(response => $(response).find("section").filter("#pastSales"))
@@ -36,4 +37,4 @@ const scanPastSales = (someURL) => {
 };
 
 
-export default scanPastSales;
+export default scanAllPastSales;
