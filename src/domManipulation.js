@@ -17,22 +17,34 @@ const nextPage = () => {
   $("button[title='Next page']").trigger("click")
 }
 
+const searchCurrentPageForSeller = (arrayOfTransactions) => {
+
+}
+
 const scanCurrentPage = (someHtmlPromise) => {
   return new Promise( (resolve, reject) => {
-    let data = $(someHtmlPromise).find("#pastSales").find("tbody[class='StyledTableBody-c11n-8-9-3__sc-8i1s74-0 eQWIgF']")
+    let tbody = $(someHtmlPromise).find("#pastSales").find("tbody[class='StyledTableBody-c11n-8-9-3__sc-8i1s74-0 eQWIgF']")
+    let data = tbody[0].children
+    let counter = 0;
+    while (counter <= 4) {
+      // if (data[0].children[counter][children][3]['innerHTML']) {
+
+      // }
+      console.log(JSON.stringify(data[0].children[counter]))
+      console.log(`data[0].children[counter] = ${data[0].children[counter]}`)
+      // console.log(`data[0].children[counter][children][3][innerHTML] = ${data[0].children[counter][children][3][innerHTML]}`)
+      counter++;
+    }
     resolve(data)
+    reject(error)
   })
 }
 
 const scanAllPastSales = (someURL) => {
-  // $.get(someURL)
-  //   .then(response => $(response).find('#pastSales'))
-  //   // tbody child w/ rows class name is ".StyledTableBody-c11n-8-9-3__sc-8i1s74-0 eQWIgF"
-  //   .then(response => console.log(response))
-
   $.get(someURL)
     .then(response => scanCurrentPage(response))
-    .then(response => console.log(response))
+    .then(response => console.log(response[0]['children'][3]['innerHTML']))
+    .catch(error => console.error(error))
 };
 
 
